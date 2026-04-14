@@ -1,0 +1,218 @@
+:root {
+    --primary-color: #ff7eb3;
+    --secondary-color: #ff758c;
+    --bg-gradient: linear-gradient(135deg, #fcd0df 0%, #ffd1ff 100%);
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --text-dark: #4a4a4a;
+    --text-light: #7a7a7a;
+    --font-heading: 'Fredoka', sans-serif;
+    --font-body: 'Poppins', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-body);
+    overflow: hidden;
+    position: relative;
+    padding: 20px;
+}
+
+/* Contenedor de corazones flotantes */
+#hearts-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.heart {
+    position: absolute;
+    color: #ff4d6d;
+    font-size: 1.5rem;
+    animation: floatUp 8s linear infinite;
+    opacity: 0;
+}
+
+/* Animación para que los corazones suban desde abajo */
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) scale(0) rotate(0deg);
+        opacity: 0;
+    }
+    20% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-10vh) scale(1) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.card-container {
+    position: relative;
+    z-index: 10;
+    perspective: 1000px;
+    width: 100%;
+    max-width: 450px;
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 40px 30px;
+    box-shadow: 0 15px 35px rgba(255, 117, 140, 0.2), 
+                0 5px 15px rgba(0,0,0,0.05);
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.5);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Micro-interacción: elevación suave de la tarjeta */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(255, 117, 140, 0.3), 
+                0 10px 20px rgba(0,0,0,0.08);
+}
+
+.card-content {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.card.open .card-content {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.8);
+    position: absolute;
+}
+
+.title {
+    font-family: var(--font-heading);
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+    text-shadow: 1px 1px 0px rgba(255,255,255,1);
+}
+
+.subtitle {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+.img-placeholder {
+    font-size: 5rem;
+    margin: 20px 0;
+    animation: bounce 2s infinite ease-in-out;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+.cute-btn {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    font-family: var(--font-heading);
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255, 126, 179, 0.4);
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+/* Efecto hover vibrante en el botón */
+.cute-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(255, 126, 179, 0.6);
+}
+
+.cute-btn:active {
+    transform: scale(0.95);
+}
+
+/* Mensaje oculto que se visualiza después de presionar el botón */
+.hidden-message {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(1.2);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: none;
+}
+
+.card.open .hidden-message {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+    display: block;
+}
+
+.hidden-message h2 {
+    font-family: var(--font-heading);
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.message-text {
+    color: var(--text-dark);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.highlight {
+    font-weight: 700;
+    color: #ff4d6d;
+    background: rgba(255, 126, 179, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.signature {
+    margin-top: 30px;
+    font-style: italic;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    padding-top: 15px;
+}
+
+.jr-coder {
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin-top: 5px;
+}
+
+/* Confeti Effect */
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #f00;
+    animation: fall linear forwards;
+    z-index: 5;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh) rotate(720deg);
+    }
+}
