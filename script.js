@@ -72,9 +72,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 confetti.style.borderRadius = '50%';
             }
 
-            // Duración y rotación aleatoria
-            const duration = Math.random() * 3 + 2;
+            // Duración y caída más orgánica
+            const duration = Math.random() * 3 + 3;
             confetti.style.animationDuration = duration + 's';
+
+            // Un pequeño arrastre lateral en el viento (Drift)
+            const horizontalDrift = (Math.random() - 0.5) * 300; 
+            confetti.style.setProperty('--drift', horizontalDrift + 'px');
 
             const rotation = Math.random() * 360;
             confetti.style.transform = `rotate(${rotation}deg)`;
